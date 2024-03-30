@@ -1,0 +1,48 @@
+Tipe Microservice
+ Stateless Microservice
+   Perbedaan Stateles dan Statesfull adalah statles menyimpan data,statefull tidak mentimpan data
+   .Biasanya tidak menyimpan database
+   .Digunakan untuk melakukan tugas sederhana
+   .Biasanya digunakan sebagain utility untuk microservice
+   .Tidak bergantung dengan microservice lain
+
+   Contoh Stateless Microservice 
+    .Email Service
+    .SMS service 
+
+ .Persistence Microservice
+   .Biasanya memiliki database
+   .Biasa juga disebut sebagai master data microservice
+   .Biasa digunakan untuk mengolah data di database (CRUD)
+
+
+ Contoh Persistence Microservice
+   .customer service digunakan untuk mengolah data service di MYSQL
+   .produck service  digunakan untuk mengolah data service di PostgresSQL
+   .order service diunakan untuk mengolah data service di MongoDB
+
+ .Aggregation Microservice
+    .Tergantung dengan microservice lain
+    .Biasa digunakan sebagai pusat business logic aplikasi
+    .Boleh memiliki databse ataupun tidak 
+    .tidak bisa berdiri sendiri
+
+   Contoh Aggregation Microservice  
+     .Cart Service
+     .Payment Service
+     kedua contoh diatas diaanggap aggregation microservice karena tugas dua microservice ini
+     dia melakukan orkestratif terhadap service service yang sudah ada.
+
+    Contoh kasus Integrasi dari 3 Microservice
+    Stateless:email service, Persistance:Order Service,custumer service,produck service
+    Aggregation:Cart Service dan Payment Service,
+
+    Ketika melakukan pemesanan barang ,pertama-tama akan ke cart service,cart service akan mengecek
+    ketersedian barang ke produc service,karna produck service yg punya data nya,selanjutnya untuk data alamat
+    cart service akan ke custumer service,setelah di buat cart service akan ke order service untuk dibuat data nya,
+    setelah jadi cart service akan ke payment service dan lalu ke email service,jadi satu flow itu jalan dan orkesstraktor nya 
+    adalah cart service,selanjut nya flow lain setelah order harus dibayar dan akan dihendel payment service,setelah dibayar flow nya
+    akan dihendle payment service ,payment service akan mengirim data ke payment gateway,untuk dilakukan pembayaran,setelah pembayaran sukses,
+    payment service akan mengirim data sukses dibayar ke order service,dan order service akan update ke pemberitahuan sukses dibayar,payment service selanjutanya
+    akan mengirim email ke penjual dan pembeli
+	
